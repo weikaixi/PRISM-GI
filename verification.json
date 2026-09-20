@@ -1,0 +1,9 @@
+{
+  "checked_bulk_samples": 1696,
+  "max_absolute_score_error": 2.384185791015625e-7,
+  "nomogram_cases": 108,
+  "max_absolute_survival_error": 1.1102230246251565e-16,
+  "synthetic_smoke_tests": "passed",
+  "single_cell": "Python syntax checked; full analysis not rerun",
+  "training_feature_selection_cv": "not included"
+}
