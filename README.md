@@ -1,10 +1,25 @@
-# PRISM-GI: prediction and single-cell analysis
+# PRISM-GI: prediction, single-cell analysis and CrossDomainAdjust
 
 Research software accompanying the PRISM-GI study of colorectal, gastric and pancreatic cancer prognosis.
 
 **Web predictor:** https://prism-gi.cpmlab.cn/
 
-This release includes only frozen-model inference, optional clinical survival estimates, and selected single-cell analysis scripts. It does **not** include prognostic model training, feature selection, cross-validation, hyperparameter optimization, or model-search code. No patient-level expression, clinical records, credentials, or raw single-cell datasets are distributed here.
+This repository contains frozen-model inference, optional clinical survival estimates, selected single-cell analysis scripts, and the standalone CrossDomainAdjust R package. It does **not** include prognostic model training, feature selection, cross-validation, hyperparameter optimization, or model-search code. No patient-level expression, clinical records, credentials, or raw single-cell datasets are distributed here.
+
+## CrossDomainAdjust R package
+
+[CrossDomainAdjust 0.1.1: installation and usage](CrossDomainAdjust.md) provides reusable centroid/SVD domain-projector fitting and lambda-controlled partial projection. Download the complete [R source package](CrossDomainAdjust_0.1.1.tar.gz), including R code, help pages, examples and tests. It is separate from the frozen prediction archive below. Requires R >= 4.1.0; no compilation is needed.
+
+```r
+install.packages("remotes", repos = "https://cloud.r-project.org")
+remotes::install_url(
+  "https://raw.githubusercontent.com/weikaixi/PRISM-GI/main/CrossDomainAdjust_0.1.1.tar.gz",
+  upgrade = "never", build_vignettes = FALSE)
+library(CrossDomainAdjust)
+packageVersion("CrossDomainAdjust")
+```
+
+See the [package tutorial](CrossDomainAdjust.md) for a complete three-domain example, new-sample transformation, and plotting examples. The repository root is not an R package: use `install_url()`, not `install_github()`. Lambda selection, feature construction, and survival modeling are separate from the package's projection functions.
 
 ## Cohort prediction
 
@@ -40,4 +55,4 @@ The scripts cover QC, broad cell annotations, gene localization, UMAP/t-SNE disp
 
 `outputs/final_model_deepsurv_v1/model.pt` is the existing frozen inference checkpoint needed by the original single-cell scripts. It contains parameters and training-derived reference summaries, not individual patient records. Use `torch.load(..., weights_only=True)` as in the code.
 
-No open-source license is assigned by this upload; contact the repository owner for reuse terms. The code is provided for research and reproducibility inspection, not diagnosis or treatment decisions.
+The CrossDomainAdjust source package is MIT-licensed, as specified in its DESCRIPTION and LICENSE files. No open-source license is assigned to the separate prediction and single-cell archive by this upload; contact the repository owner for its reuse terms. All resources are provided for research, not diagnosis or treatment decisions.
