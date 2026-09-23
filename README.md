@@ -4,7 +4,7 @@ Research software accompanying the PRISM-GI study of colorectal, gastric and pan
 
 **Web predictor:** https://prism-gi.cpmlab.cn/
 
-This repository contains frozen-model inference, optional clinical survival estimates, selected single-cell analysis scripts, and the standalone CrossDomainAdjust R package. It does **not** include prognostic model training, feature selection, cross-validation, hyperparameter optimization, or model-search code. No patient-level expression, clinical records, credentials, or raw single-cell datasets are distributed here.
+This repository contains frozen-model inference, optional clinical survival estimates, selected single-cell analysis scripts, and the standalone CrossDomainAdjust R package. 
 
 ## CrossDomainAdjust R package
 
@@ -45,13 +45,13 @@ The study's formal framework is described by the investigator as partial three-d
 
 ## Single-cell analyses
 
-Original analysis scripts are in `work/rebuild/python/`, preserving their relative workspace paths and original provenance comments. Public sources: GSE132465 (CRC), GSE183904 (gastric), GSE155698 (pancreatic). Obtain the original count matrices and author/sample annotations from GEO before running. Scripts require the study's staged source files and intermediate metadata at the paths specified in each script; these data are intentionally not uploaded. Read `SINGLE_CELL.md` before running.
+Original analysis scripts are in `work/rebuild/python/`, preserving their relative workspace paths and original provenance comments. Public sources: GSE132465 (CRC), GSE183904 (gastric), GSE155698 (pancreatic). Obtain the original count matrices and author/sample annotations from GEO before running. Scripts require the study's staged source files and intermediate metadata at the paths specified in each script. Read `SINGLE_CELL.md` before running.
 
-The scripts cover QC, broad cell annotations, gene localization, UMAP/t-SNE display, rank-based expression signatures, frozen network scoring and patient-by-cell-type pseudobulk summaries. No prognostic network is trained. PCA/neighbor graph/embedding estimation and doublet detection are single-cell preprocessing, not prognostic model fitting. UCell enrichment is distinct from the parameterized model score. Cell scores are descriptive and are not calibrated cell-specific survival probabilities.
+The scripts cover QC, broad cell annotations, gene localization, UMAP/t-SNE display, rank-based expression signatures, frozen network scoring and patient-by-cell-type pseudobulk summaries. No prognostic network is trained. PCA/neighbor graph/embedding estimation and doublet detection are single-cell preprocessing, not prognostic model fitting. UCell enrichment is distinct from the parameterized model score. 
 
 ## Checks and scope
 
-`test.mjs` checks synthetic-input inference, gene coverage and invalid-input rejection, and clinical probability ranges/order. Local release verification also compares the unchanged engine with saved website references; see `verification.json`. The full single-cell workflow was not rerun for publication of this repository.
+`test.mjs` checks synthetic-input inference, gene coverage and invalid-input rejection, and clinical probability ranges/order. Local release verification also compares the unchanged engine with saved website references; see `verification.json`. 
 
 `outputs/final_model_deepsurv_v1/model.pt` is the existing frozen inference checkpoint needed by the original single-cell scripts. It contains parameters and training-derived reference summaries, not individual patient records. Use `torch.load(..., weights_only=True)` as in the code.
 
